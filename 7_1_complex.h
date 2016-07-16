@@ -2,8 +2,10 @@
 #define _7_1_COMPLEX
 
 #include <math.h>
+enum coordinate_type {RECTANGULAR, POLAR};
 typedef struct complex_struct
 {
+	enum coordinate_type t;
 	double x;
 	double y;
 }COMPLEX_STRUCT;
@@ -11,6 +13,7 @@ typedef struct complex_struct
 COMPLEX_STRUCT make_from_real_img(double x,double y)
 {
 	COMPLEX_STRUCT z;
+	z.t=RECTANGULAR;
 	z.x=x;
 	z.y=y;
 	return z;	
@@ -19,29 +22,42 @@ COMPLEX_STRUCT make_from_real_img(double x,double y)
 COMPLEX_STRUCT make_from_mag_ang(double r,double angle)
 {
 	COMPLEX_STRUCT z;
-	z.x=r*cos(angle);
-	z.y=r*sin(angle);
+	z.t=POLAR;
+	z.x=r;
+	z.y=angle;
 	return z;	
 }
 
 double real_part(COMPLEX_STRUCT z)
 {
-	return z.x;
+	if(z.t==RECTANGULAR)
+		return z.x;
+	else
+		return z.x*cos(z.y);
 }
 
 double ima_part(COMPLEX_STRUCT z)
 {
-	return z.y;
+	if(z.t==RECTANGULAR)
+		return z.y;
+	else
+		return z.x*sin(z.y);
 }
 
 double magnitude(COMPLEX_STRUCT z)
 {
-	return sqrt(z.x*z.x+z.y*z.y);
+	if(z.t==RECTANGULAR)
+		return sqrt(z.x*z.x+z.y*z.y);
+	else
+		return z.x;
 }
 
 double angle(COMPLEX_STRUCT z)
 {
-	return atan2(z.y,z.x);
+	if(z.t==RECTANGULAR)
+		return atan2(z.y,z.x);
+	else
+		return z.y;
 }
 
 COMPLEX_STRUCT add_complex(COMPLEX_STRUCT z1, COMPLEX_STRUCT z2)

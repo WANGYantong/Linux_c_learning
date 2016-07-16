@@ -19,12 +19,14 @@ int main(void)
 			scanf("%d",&select);
 			switch(select)
 			{
-				case(1):	printf("\nplease input the real part:\n");
+				case(1): 	buff.t=RECTANGULAR;
+						printf("\nplease input the real part:\n");
 						scanf("%lf",&buff.x);
 						printf("\nplease input the ima part:\n");
 						scanf("%lf",&buff.y);
 						break;
-				case(2):	printf("\nplease input the mag part:\n");
+				case(2):	buff.t=POLAR;
+						printf("\nplease input the mag part:\n");
 						scanf("%lf",&buff.x);
 						printf("\nplease input the ang part:\n");
 						scanf("%lf",&buff.y);
