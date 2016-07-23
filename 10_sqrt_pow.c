@@ -3,17 +3,21 @@
 
 
 float mysqrt(float y, float precision);
-/* float mypow(float x, int n); */
+float mypow(float x, int n);
 
 int main(void)
 {
 	float num, precision = 0.001;
 	int i = 1;
+	int select,power;
 
 	while (i == 1) {
 		printf("\ninput a number:\n");
 		scanf("%f", &num);
+		printf("\ninput a power:\n");
+		scanf("%d", &power);
 		printf("\nsqrt:%f\n", mysqrt(num, precision));
+		printf("\npower:%f\n", mypow(num,power);
 
 		printf("what do you want to do next?");
 		printf("\n1.go on\t2.stop\n");
@@ -43,4 +47,19 @@ float mysqrt(float y, float precision)
 	}
 	return mid;
 
+}
+float mypow(float x, int n)
+{
+	float result;
+	
+	if(n==0)
+		result=1;
+	if(n==1)
+		result=x;
+	else if(n%2==0)
+		result=mypow(x,n/2)*mypow(x,n/2);
+	else
+		result=mypow(x,n-1)*x;
+
+	return result;
 }
